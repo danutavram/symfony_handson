@@ -2,14 +2,31 @@
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class HelloController
+class HelloController extends AbstractController
 {
-    #[Route(path: '/', name: 'home', methods: ['GET'])]
-    public function index(): Response
+    private array $messages = ["Hello", "Hi", "Bye!"];
+
+    #[Route(path: '/{limit<\d+>?3}', name: 'home', methods: ['GET'])]
+    public function index(int $limit): Response
     {
-        return new Response("HI!");
+        return $this->render('hello/index.html.twig', [
+            'message' => implode(',', array_slice($this->messages, 0, $limit))
+        ]);
+    }
+
+    #[Route('/messages/{id<\d+>}', name: "app_show_one")]
+    public function showOne(int $id): Response
+    {
+        return $this->render(
+            'hello/show_one.html.twig',
+            [
+                'message' => $this->messages[$id]
+            ]
+        );
+        // return new Response($this->messages[$id]);
     }
 }
