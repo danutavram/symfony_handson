@@ -10,11 +10,12 @@ class HelloController extends AbstractController
 {
     private array $messages = ["Hello", "Hi", "Bye!"];
 
-    #[Route(path: '/{limit<\d+>?3}', name: 'home', methods: ['GET'])]
+    #[Route(path: '/{limit?3}', name: 'home', methods: ['GET'])]
     public function index(int $limit): Response
     {
         return $this->render('hello/index.html.twig', [
-            'message' => implode(',', array_slice($this->messages, 0, $limit))
+            'messages' => $this->messages,
+            'limit' => $limit
         ]);
     }
 
