@@ -8,6 +8,8 @@ framework:
 
     #esi: true
     #fragments: true
+    form:
+        legacy_error_messages: false
 
 when@test:
     framework:

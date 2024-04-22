@@ -1,7 +1,24 @@
-<div style="color: grey">
-    {% if date(post.created) < date('-1year') %}
-    Older than 1 year
-    {% else %}
-    {{ post.created|date('d/m/Y') }}
-    {% endif %}
+<div class="mb-4">
+  <div class="text-xl">
+    <a href="{{ path('app_micro_post_show', { post: post.id }) }}">
+      {{ post.title }}
+    </a>
+  </div>
+  <div class="text-l dark:text-gray-400">
+    {{ post.text }}
+  </div>
+  <div class="text-gray-500 dark:text-gray-300">
+    {{ post.created | date('M j, Y') }}
+  </div>
+  <div>
+    <a href="#">
+      Like <span class="px-2 rounded-md bg-gray-200 dark:bg-gray-700">0</span>
+    </a>
+  </div>
+  <div class="text-sm text-gray-500 dark:text-gray-400">
+    <a href="#">user@email.com</a>
+  </div>
+  <div>
+    <a href="{{ path('app_micro_post_edit', { post: post.id }) }}">Edit</a>
+  </div>
 </div>
