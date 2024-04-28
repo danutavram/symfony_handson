@@ -17,6 +17,7 @@ class AppFixtures extends Fixture
     {
         $user1 = new User();
         $user1->setEmail('test@test.com');
+        $user1->setRoles(['ROLE_EDITOR']);
         $user1->setPassword($this->userPasswordHasher->hashPassword($user1, '12345678'));
 
         $manager->persist($user1);
